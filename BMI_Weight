@@ -1,0 +1,64 @@
+class bmi_gewicht:
+
+    bmi_ergebnis = 0
+
+    def __init__(self, grösse, gewicht):
+        self.grösse = grösse
+        self.gewicht = gewicht
+        bmi_gewicht.bmi_ergebnis = 0
+        # self.geschlecht = geschlecht
+
+    def bmi_berechnung(self):
+        if isinstance(self.grösse, int):
+            self.grösse = float(self.grösse/100)
+
+        if isinstance(self.gewicht, float) and isinstance(self.grösse, float):
+            try:
+                bmi_gewicht.bmi_ergebnis = float(self.gewicht/self.grösse/self.grösse)
+            except ZeroDivisionError:
+                pass
+            finally:
+                if(bmi_gewicht.bmi_ergebnis < 16.00):
+                    print("Ihren BMI ist %.2f, Starkes Untergewicht" %(bmi_gewicht.bmi_ergebnis))
+                elif(bmi_gewicht.bmi_ergebnis == 16.0 or bmi_gewicht.bmi_ergebnis < 17):
+                    print("Ihren BMI ist %.2f, Mässiges Untergewicht" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis == 17.0 or bmi_gewicht.bmi_ergebnis < 18.5):
+                    print("Ihren BMI ist %.2f, Leichtes Untergewicht" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis == 18.5 or bmi_gewicht.bmi_ergebnis < 25):
+                    print("Ihren BMI ist %.2f, Normalgewicht" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis == 25.0 or bmi_gewicht.bmi_ergebnis < 30):
+                    print("Ihren BMI ist %.2f, Präadipositas" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis == 30.0 or bmi_gewicht.bmi_ergebnis < 35):
+                    print("Ihren BMI ist %.2f, Adipositas Grad 1" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis == 35.0 or bmi_gewicht.bmi_ergebnis < 40):
+                    print("Ihren BMI ist %.2f, Adipositas Grad 2" %(bmi_gewicht.bmi_ergebnis))
+                elif (bmi_gewicht.bmi_ergebnis > 40.0):
+                    print("Ihren BMI ist %.2f, Adipositas Grad 3" %(bmi_gewicht.bmi_ergebnis))
+
+        else:
+            print("BMI-Berechnung ergibt nicht", "Falsch")
+
+print("Body Mass Index (\"BMI\") Berechnung")
+
+try:
+    grösse = input("Ihre Grösse eingeben: ")
+    gewicht = float(input("Ihr Gewicht eingeben: "))
+except ValueError:
+    pass
+
+nb = None
+
+for cast in (int, float):
+    try:
+        nb = cast(grösse)
+        if isinstance(cast, int):
+            int(nb)
+        elif isinstance(cast, float):
+            float(nb)
+        break
+    except ValueError:
+        pass
+
+bmi_eingeben = bmi_gewicht(nb, gewicht)
+
+bmi_eingeben.bmi_berechnung()
